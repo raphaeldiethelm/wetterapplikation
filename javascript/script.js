@@ -10,6 +10,7 @@ function success(pos) {
   $('.js-long').text(crd.longitude);
   $('.js-lat').text(crd.latitude);
   $('.js-acc').text('+-' + crd.accuracy + 'm');
+  $('js-temp').text(currently.temperature);
 
   $.ajax({
   	url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + crd.latitude + ',' + crd.longitude,
