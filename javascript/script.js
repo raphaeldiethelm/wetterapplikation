@@ -9,7 +9,7 @@ function success(pos) {
 
   $('.js-long').text(crd.longitude);
   $('.js-lat').text(crd.latitude);
-  $('.js-acc').text(crd.accuracy + 'm');
+  $('.js-acc').text('+-' + crd.accuracy + 'm');
 };
 
 function error(err) {
