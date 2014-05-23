@@ -10,6 +10,13 @@ function success(pos) {
   $('.js-long').text(crd.longitude);
   $('.js-lat').text(crd.latitude);
   $('.js-acc').text('+-' + crd.accuracy + 'm');
+
+  $.ajax({
+  	url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/37.8267,-122.423',
+  	success: function(data){
+  		console.log(data);
+  	}
+  });
 };
 
 function error(err) {
