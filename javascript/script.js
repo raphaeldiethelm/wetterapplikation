@@ -12,7 +12,7 @@ function success(pos) {
   $('.js-acc').text('+/- ' + crd.accuracy + ' meters');
 
   $.ajax({
-  	url: 'https://maps.googleapis.com/maps/api/geocode/output',
+  	url: 'https://maps.googleapis.com/maps/api/geocode/json',
 
   	//api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + crd.latitude + ',' + crd.longitude,
   	data: {
