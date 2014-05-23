@@ -12,21 +12,32 @@ function success(pos) {
   $('.js-acc').text('+/- ' + crd.accuracy + ' meters');
 
   $.ajax({
-  	url: 'https://maps.googleapis.com/maps/api/geocode/json',
-
-  	//api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + crd.latitude + ',' + crd.longitude,
+  	url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + crd.latitude + ',' + crd.longitude,
   	data: {
-  		//units: 'si'
-  		latlng: crd.latitude + ',' + crd.longitude,
-  		sensor: true
+  		units: 'si'
   	},
   	dataType: 'jsonp',
   	success: function(data){
   		$('.js-temp').text(data.currently.apparentTemperature + ' °C');
   		$('.js-wsp').text(data.currently.windSpeed + ' meters per second');
-  		$('.js-address').text(data.currently.address);
   	}
   });
+
+
+  $.ajax({
+  	url: 'https://maps.googleapis.com/maps/api/geocode/json',
+  	data: {
+  		latlng: crd.latitude + ',' + crd.longitude,
+  		sensor: true
+  	},
+  	success: function(data){
+  		console.log(data);
+  	}
+  });
+
+
+
+
 };
 
 
