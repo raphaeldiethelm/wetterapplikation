@@ -7,10 +7,11 @@ var options = {
 function success(pos) {
   var crd = pos.coords;
 
-  console.log('Your current position is:');
-  console.log('Latitude : ' + crd.latitude);
-  console.log('Longitude: ' + crd.longitude);
-  console.log('More or less ' + crd.accuracy + ' meters.');
+  $("js-long").text(crd.longitude)
+  $("js-lat").text(crd.latitude)
+  $("js-acc").text(crd.accuracy)
+
+  
 };
 
 function error(err) {
