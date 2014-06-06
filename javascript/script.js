@@ -72,9 +72,9 @@ $('.js-custom-address').on('click', 'a', function(event) {
           },
          dataType: 'jsonp',
           success: function(data){
-            $('.js-long').text(crd.longitude);
-  $('.js-lat').text(crd.latitude);
-  $('.js-acc').text('+/- ' + crd.accuracy + ' meters');
+            $('.js-long').text(data.longitude);
+            $('.js-lat').text(data.latitude);
+            $('.js-acc').text('+/- ' + data.accuracy + ' meters');
 
            $('.js-temp').text(data.currently.apparentTemperature + ' °C');
            $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
