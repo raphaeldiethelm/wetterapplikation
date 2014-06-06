@@ -65,16 +65,20 @@ $('.js-custom-address').on('click', 'a', function(event) {
         console.log(data);
         $('.js-custom-address-result').text(data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng);
 
+        $.ajax({
+    url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + crd.latitude + ',' + crd.longitude,
+    data: {
+      units: 'si'
+    },
+    dataType: 'jsonp',
+    success: function(data){
+      $('.js-temp').text(data.currently.apparentTemperature + ' °C');
+      $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
+    }
+  });
       }
   });
 
-function success(pos) {
-  var crd = pos.coords;
-
-  $('.js-custom-address-result').text(crd.longitude);
-  $('.js-custom-address-result').text(crd.latitude);
-  
-  };
 
 
 });
