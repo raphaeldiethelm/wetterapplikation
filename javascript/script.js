@@ -36,8 +36,6 @@ function success(pos) {
   });
 
 
-
-
 };
 
 
@@ -74,9 +72,7 @@ $('.js-custom-address').on('click', 'a', function(event) {
           success: function(data){
             $('.js-long').text(data.longitude);
             $('.js-lat').text(data.latitude);
-            $('.js-acc').text('+/- ' + data.accuracy + ' meters');
 
-            $('.js-address').text(data.results[1].formatted_address);
 
             $('.js-temp').text(data.currently.apparentTemperature + ' °C');
             $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
