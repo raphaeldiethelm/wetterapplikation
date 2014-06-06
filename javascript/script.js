@@ -74,6 +74,7 @@ function success(pos) {
   $('.js-custom-address-result').text(crd.longitude);
   $('.js-custom-address-result').text(crd.latitude);
   
+  };
 
 
 });
