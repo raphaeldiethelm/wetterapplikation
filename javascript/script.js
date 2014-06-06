@@ -55,15 +55,15 @@ $('.js-custom-address').on('click', 'a', function(event) {
   var address = $('input','.js-custom-address').val();
 
 
-$.ajax({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json',
-    data: {
-      address: address,
-      sensor: false
-    },
-    success: function(data){
-      console.log(data);
-    }
+  $.ajax({
+      url: 'https://maps.googleapis.com/maps/api/geocode/json',
+      data: {
+        address: address,
+        sensor: false
+      },
+      success: function(data){
+        console.log(data);
+      }
   });
 
 
