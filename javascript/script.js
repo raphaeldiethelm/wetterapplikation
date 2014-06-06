@@ -73,6 +73,7 @@ $('.js-custom-address').on('click', 'a', function(event) {
             $('.js-long').text(data.longitude);
             $('.js-lat').text(data.latitude);
 
+            $('.js-custom-address-result').text(data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng);
 
             $('.js-temp').text(data.currently.apparentTemperature + ' °C');
             $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
