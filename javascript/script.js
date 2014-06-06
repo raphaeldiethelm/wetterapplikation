@@ -49,13 +49,22 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 //test
 
+$('.js-custom-address').on('click', 'a', function(event) {
+  event.preventDefault();
+
+  var address = $('input','.js-custom-address').val();
+
+
 $.ajax({
     url: 'https://maps.googleapis.com/maps/api/geocode/json',
     data: {
-      address: 'Gaiserwaldstrasse 6, 9015 St.Gallen',
+      address: address,
       sensor: false
     },
     success: function(data){
       console.log(data);
     }
   });
+
+
+});
