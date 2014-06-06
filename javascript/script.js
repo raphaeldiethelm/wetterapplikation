@@ -76,8 +76,10 @@ $('.js-custom-address').on('click', 'a', function(event) {
             $('.js-lat').text(data.latitude);
             $('.js-acc').text('+/- ' + data.accuracy + ' meters');
 
-           $('.js-temp').text(data.currently.apparentTemperature + ' °C');
-           $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
+            $('.js-address').text(data.results[0].formatted_address);
+
+            $('.js-temp').text(data.currently.apparentTemperature + ' °C');
+            $('.js-wsp').text(data.currently.windSpeed + ' meters per second');
           
           }
   });
