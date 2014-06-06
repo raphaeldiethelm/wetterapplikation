@@ -64,9 +64,16 @@ $('.js-custom-address').on('click', 'a', function(event) {
       success: function(data){
         console.log(data);
         $('.js-custom-address-result').text(data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng);
-        $('.js-custom-address-result').text(data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng + currently.apparentTemperature + ' °C');
+
       }
   });
+
+function success(pos) {
+  var crd = pos.coords;
+
+  $('.js-custom-address-result').text(crd.longitude);
+  $('.js-custom-address-result').text(crd.latitude);
+  
 
 
 });
