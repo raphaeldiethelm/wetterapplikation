@@ -64,7 +64,7 @@ $('.js-custom-address').on('click', 'a', function(event) {
       success: function(data){
         console.log(data);
         $('.js-custom-address-result').text(data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng);
-        $('.js-temp').text(data.results[0].geometry.location.currently.apparentTemperature + ' °C');
+        $('.js-custom-address-result').text(data.results[0].geometry.location.currently.apparentTemperature + ' °C');
       }
   });
 
