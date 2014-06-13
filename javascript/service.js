@@ -11,6 +11,10 @@ $(document).ready(function() {
 		$('.js-current-position').text(crd.latitude + ', ' + crd.longitude);
 	};
 
+	var error = function() {
+		console.warn('ERROR(' + err.code + '): ' + err.message);
+	};
+	
 	navigator.geolocation.getCurrentPosition(success, error, options);
 });
 
