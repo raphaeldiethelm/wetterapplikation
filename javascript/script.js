@@ -1,6 +1,6 @@
 var options = {
   enableHighAccuracy: true,
-  timeout: 15000,
+  timeout: 10000,
   maximumAge: 0
 };
 
@@ -33,7 +33,7 @@ function success(pos) {
     dataType: 'jsonp',
     success: function(data) {
       $('.js-temp').text(data.currently.apparentTemperature + '°C');
-      $('.js-windspeed').text(data.currently.windSpeed + 'm/s');
+      $('.js-windsp').text(data.currently.windSpeed + 'm/s');
       $('.js-symbol').text(weatherIcons[data.currently.icon]);
     }
 
@@ -46,7 +46,7 @@ function success(pos) {
       sensor: true
     },
     success: function(data) {
-      $('.js-address').text(data.results[0].formatted_address);
+      $('.js-loc').text(data.results[0].formatted_address);
       console.log(data);
 
     }
@@ -68,13 +68,13 @@ function success(pos) {
       },
         success: function(data) {
         console.log(data);
-        $('.js-customaddress-result').text(
+        $('.js-cusadd-result').text(
           data.results[0].geometry.location.lat +
           ',' +
           data.results[0].geometry.location.lng)
         $('.js-lat').text(data.results[0].geometry.location.lat);
         $('.js-long').text(data.results[0].geometry.location.lng);
-        $('.js-address').text(data.results[0].formatted_address);
+        $('.js-loc').text(data.results[0].formatted_address);
         $('.js-acc').text(crd.accuracy +'m');
 
         $.ajax({
@@ -85,7 +85,7 @@ function success(pos) {
           dataType: 'jsonp',
           success: function(data) {
         $('.js-temp').text(data.currently.apparentTemperature + '°C');
-        $('.js-windspeed').text(data.currently.windSpeed + 'm/s');
+        $('.js-windsp').text(data.currently.windSpeed + 'm/s');
         $('.js-icon').text(data.hourly.data[0].icon);
         }
 
@@ -95,15 +95,14 @@ function success(pos) {
   });
 
 
-};
-
+ 
 function error(err) {
   console.warn('ERROR(' + err.code + '): ' + err.message);
 };
 
 var getWeatherData = function(lat, lng, callback) {
   $.ajax({
-          url: 'https://api.forecast.io/forecast/4cbf11a0b6a5166782b8d4cb9d5defef/' + lat + ',' + lng,
+          url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + lat + ',' + lng,
           data: {
             units: 'si'
           },
@@ -113,16 +112,59 @@ var getWeatherData = function(lat, lng, callback) {
           }
 
         });
-};
+}
 
-  $.ajax({
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+$.ajax({
     url: 'https://maps.googleapis.com/maps/api/geocode/json',
     data: {
-      units: 'si'
+          address: 'Sao Paulo',
+          sensor: false
     },
-    dataType: 'jsonp',
-    success: function(data);
-      $('.js-weather-manaus').text(data.currently.summary + ' (' + data.currently.temperature + '°C)');
+    success: function(data) {
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
 
-      
-    };
+      $.ajax({
+          url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + lat + ',' + lng,
+          data: {
+            units: 'si'
+          },
+          dataType: 'jsonp',
+          success: function(data) {
+            $('.js-temp-paulo').text(data.currently.summary + ' ' + data.currently.temperature + 'C°');
+          }
+
+        });
+
+    }
+
+  });
+
+$.ajax({
+    url: 'https://maps.googleapis.com/maps/api/geocode/json',
+    data: {
+          address: 'Rio de Janeiro',
+          sensor: false
+    },
+    success: function(data) {
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+
+      $.ajax({
+          url: 'https://api.forecast.io/forecast/b1fe5cae982490b8e60dac5cb2368ad8/' + lat + ',' + lng,
+          data: {
+            units: 'si'
+          },
+          dataType: 'jsonp',
+          success: function(data) {
+            $('.js-temp-janeiro').text(data.currently.summary + ' ' + data.currently.temperature + 'C°');
+          }
+
+        });
+
+    }
+
+  });
