@@ -1,56 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Meine Position</title>
+	<title>Wetterapplikation</title>
 
-  <link rel="stylesheet" href="stylesheet/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="//code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 </head>
 <body>
 
-  <h1>Meine Position</h1>
-  <dl>
+<div data-role="page" class="custom">
 
-    <dt>Address</dt>
-    <dd class="js-loc">-</dd>
+	<div data-role="header">
+		<h1>Page Title</h1>
+	</div>
 
-    <dt>Longitude</dt>
-    <dd class="js-long">-</dd>
+	<div role="main" class="ui-content">
+		<p>Page content goes here.</p>
+	</div>
 
-    <dt>Latitude</dt>
-    <dd class="js-lat">-</dd>
-
-    <dt>Accuracy</dt>
-    <dd class="js-acc">-</dd>
-
-    <dt>Temperature</dt>
-    <dd class="js-temp">-</dd>
-
-    <dt>Wind Speed</dt>
-    <dd class="js-windsp">-</dd>
-
-    <dt>Custom address</dt>
-    <dd class="js-custom-address">
-      <input type="text">
-      <a href="#">Search</a><br/>
-      <span class="js-cusadd-result"></span>
-    </dd>
-
-    <dt>Symbol</dt>
-    <dd class="symbol js-symbol">)</dd>
-
-    <dt>Weather in Sao Paulo</dt>
-    <dd class="js-temp-paulo">-</dd>
-
-    <dt>Weather in Rio de Janeiro</dt>
-    <dd class="js-temp-janeiro">-</dd>
-
-  </dl>
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div>
+</div>
 
 
-  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="javascript/script.js"></script>
-  
+<div data-role="page" class="main">
+
+	<div data-role="header">
+		<h1>Page Title</h1>
+	</div>
+
+	<div role="main" class="ui-content">
+		<p>Page content goes here.</p>
+	</div>
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div>
+</div>
+
 </body>
 </html>
