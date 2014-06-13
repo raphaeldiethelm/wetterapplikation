@@ -1,6 +1,6 @@
 var options = {
   enableHighAccuracy: true,
-  timeout: 10000,
+  timeout: 15000,
   maximumAge: 0
 };
 
@@ -33,7 +33,7 @@ function success(pos) {
     dataType: 'jsonp',
     success: function(data) {
       $('.js-temp').text(data.currently.apparentTemperature + '°C');
-      $('.js-windsp').text(data.currently.windSpeed + 'm/s');
+      $('.js-windspeed').text(data.currently.windSpeed + 'm/s');
       $('.js-symbol').text(weatherIcons[data.currently.icon]);
     }
 
@@ -46,7 +46,7 @@ function success(pos) {
       sensor: true
     },
     success: function(data) {
-      $('.js-loc').text(data.results[0].formatted_address);
+      $('.js-address').text(data.results[0].formatted_address);
       console.log(data);
 
     }
@@ -68,13 +68,13 @@ function success(pos) {
       },
         success: function(data) {
         console.log(data);
-        $('.js-cusadd-result').text(
+        $('.js-customaddress-result').text(
           data.results[0].geometry.location.lat +
           ',' +
           data.results[0].geometry.location.lng)
         $('.js-lat').text(data.results[0].geometry.location.lat);
         $('.js-long').text(data.results[0].geometry.location.lng);
-        $('.js-loc').text(data.results[0].formatted_address);
+        $('.js-address').text(data.results[0].formatted_address);
         $('.js-acc').text(crd.accuracy +'m');
 
         $.ajax({
@@ -85,7 +85,7 @@ function success(pos) {
           dataType: 'jsonp',
           success: function(data) {
         $('.js-temp').text(data.currently.apparentTemperature + '°C');
-        $('.js-windsp').text(data.currently.windSpeed + 'm/s');
+        $('.js-windspeed').text(data.currently.windSpeed + 'm/s');
         $('.js-icon').text(data.hourly.data[0].icon);
         }
 
@@ -93,13 +93,6 @@ function success(pos) {
       }
     });
   });
-
-
-  var output = document.getElementById("out");
-  var img = new Image();
-  img.src = "http://maps.googleapis.com/maps/api/staticmap?center=" + crd.latitude + "," + crd.longitude + "&zoom=13&size=400x400&sensor=true";
-
-  output.appendChild(img);
 
 
 };
