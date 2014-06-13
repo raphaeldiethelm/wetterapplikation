@@ -1,3 +1,11 @@
+var options = {
+  enableHighAccuracy: true,
+  timeout: 10000,
+  maximumAge: 0
+};
+
 $(document).ready(function() {
-	alert(234);
+	navigator.geolocation.getCurrentPosition(success, error, options);
 });
+
+
