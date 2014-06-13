@@ -5,7 +5,7 @@ $(document).ready(function() {
 	  maximumAge: 0
 	};
 
-	var success = function() {
+	var success = function(pos) {
 		var crd = pos.coords;
 	
 		$('.js-current-position').text(crd.latitude + ', ' + crd.longitude);
@@ -14,7 +14,7 @@ $(document).ready(function() {
 	var error = function() {
 		console.warn('ERROR(' + err.code + '): ' + err.message);
 	};
-	
+
 	navigator.geolocation.getCurrentPosition(success, error, options);
 });
 
