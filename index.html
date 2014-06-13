@@ -1,46 +1,57 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Wetterapplikation</title>
+  <title>Meine Position</title>
+
+  <link rel="stylesheet" href="stylesheets/style.css">
+
 </head>
 <body>
+
   <h1>Meine Position</h1>
-  <link rel="stylesheet" href="stylesheet/style.css">
   <dl>
+
+    <dt>Address</dt>
+    <dd class="js-loc">-</dd>
+
     <dt>Longitude</dt>
     <dd class="js-long">-</dd>
-    <br>
+
     <dt>Latitude</dt>
     <dd class="js-lat">-</dd>
-    <br>
+
     <dt>Accuracy</dt>
     <dd class="js-acc">-</dd>
-    <br>
-     <dt>Address</dt>
-    <dd class="js-address">-</dd>
-    <br>
-    <dt>Current Temperature</dt>
-    <dd class="js-temp">-</dd>
-    <br>
-    <dt>Wind Speed</dt>
-    <dd class="js-wsp">-</dd>
-    <br>
-    <dt>Weather</dt>
-    <dd class="weather-icon">ABCDEFG</dd>
-    <br>
 
-    <dt>Custom Address</dt>
+    <dt>Temperature</dt>
+    <dd class="js-temp">-</dd>
+
+    <dt>Wind Speed</dt>
+    <dd class="js-windsp">-</dd>
+
+    <dt>Custom address</dt>
     <dd class="js-custom-address">
       <input type="text">
-      <a href=" ">suchen</a>
-      <br>
-      <span class="js-custom-address-result"></span>
+      <a href="#">Search</a><br/>
+      <span class="js-cusadd-result"></span>
     </dd>
+
+    <dt>Symbol</dt>
+    <dd class="symbol js-symbol">)</dd>
+
+    <dt>Temperature "Manaus"</dt>
+    <dd class="js-weather-manaus">-</dd>
+
+    <dt>Temperature "Sao Paulo"</dt>
+    <dd class="js-weather-saopaulo">-</dd>
+
   </dl>
 
+  <div id="out"></div>
 
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="javascript/script.js"></script>
+  <script src="javascripts/script.js"></script>
+  
 </body>
 </html>
