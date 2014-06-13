@@ -31,10 +31,17 @@
 </div>
 
 
-<div data-role="page" class="custom">
+<div data-role="page" id="custom">
+
+	<div data-role="panel" id="menu-custom" data-display="reveal" data-position="left">
+		<ul data-role="listview">
+		    <li><a href="#main">Custom Location</a></li>
+		</ul>
+	</div>
 
 	<div data-role="header">
 		<h1>Custom Page</h1>
+		<a href="#menu-custom" class="ui-btn ui-btn-left ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-bars ui-alt-icon ui-nodisc-icon ui-btn-icon-notext">Menu</a>
 	</div>
 
 	<div role="main" class="ui-content">
