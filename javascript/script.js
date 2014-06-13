@@ -125,4 +125,4 @@ var getWeatherData = function(lat, lng, callback) {
       $('.js-weather-manaus').text(data.currently.summary + ' (' + data.currently.temperature + '°C)');
 
       
-    });
+    }
