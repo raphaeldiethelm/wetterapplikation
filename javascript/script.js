@@ -103,7 +103,7 @@ $(document).ready(function() {
           },
           dataType: 'jsonp',
           success: function(data) {
-          $('.weather-icon').text(weatherIcons[data.currently.icon]);
+          $('.js-current-weather').text(weatherIcons[data.currently.icon]);
           }
         });
       }
