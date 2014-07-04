@@ -85,7 +85,7 @@ $(document).ready(function() {
       url: 'http://maps.googleapis.com/maps/api/geocode/json',
       data: {
         address: address,
-        sensor: false
+        sensor: false,
       },
       success: function(data) {
         $('.js-custom-location-result').text(
@@ -95,6 +95,7 @@ $(document).ready(function() {
         );
 
         $('.js-custom-location-name').text(data.results[0].address_components[0].long_name);
+        $('.js-current-weather').text(weatherIcons[data.currently.icon]);
       }
   });
 });
