@@ -88,24 +88,29 @@ $(document).ready(function() {
         sensor: false,
       },
       success: function(data) {
-        $('.js-custom-location-result').text(
+
+        $.ajax({
+          url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + data.results[0].geometry.location.lat + ',' + data.results[0].geometry.location.lng,
+          data: {
+          units : 'si'
+        },
+        dataType: 'jsonp',
+        success: function(data) {
+          $('.js-custom-weather').text(weatherIcons[data.currently.icon]);
+        }
+      });
+
+
+        $('.js-custom-position').text(
           data.results[0].geometry.location.lat +
           ', ' +
           data.results[0].geometry.location.lng
         );
 
         $('.js-custom-location-name').text(data.results[0].address_components[0].long_name);
+        $('.js-custom-address').text(data.results[0].address_components[0].long_name);
 
-        $.ajax({
-          url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + crd.latitude + ',' + crd.longitude,
-          data: {
-          units : 'si'
-          },
-          dataType: 'jsonp',
-          success: function(data) {
-          $('.js-current-weather').text(weatherIcons[data.currently.icon]);
-          }
-        });
+        
       }
   });
 });
