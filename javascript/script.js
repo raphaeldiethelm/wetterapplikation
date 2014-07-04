@@ -1,134 +1,101 @@
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
+$(document).ready(function() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
 
-// clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+  // Weather icons
+  var weatherIcons = {
+    'clear-day': 'B',
+    'clear-night': 'C',
+    'rain': 'R',
+    'snow': 'X',
+    'sleet': 'W',
+    'wind': 'S',
+    'fog': 'M',
+    'cloudy': 'N',
+    'partly-cloudy-day': 'H',
+    'partly-cloudy-night': 'I'
+  };
 
-var weatherIcons = {
-  'clear-day': 'B',
-  'clear-night': 'C',
-  'rain': 'R',
-  'partly-cloudy-night': 'I'
-};
+  // Default Sprache einstellen
+  if (localStorage.getItem('language') === null) {
+    localStorage.setItem('language', 'de');
+  }
 
-function success(pos) {
-  var crd = pos.coords;
+  // Default position setzen
+  if (localStorage.getItem('position') === null) {
+    localStorage.setItem('position', null);
+  }
 
-  $('.js-lat').text(crd.latitude);
-  $('.js-long').text(crd.longitude);
-  $('.js-acc').text(crd.accuracy + ' m');
-
-  $.ajax({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json',
-    data: {
-      latlng: crd.latitude + ',' + crd.longitude,
-      sensor: true
-    },
-    success: function(data) {
-      $('.js-address').text(data.results[0].formatted_address);
+  var getAddress = function(pos) {
+    if (typeof pos !== 'undefined') {
+      localStorage.setItem('position', JSON.stringify(pos.coords));
     }
-  });
 
-  getWeahterData(crd.latitude, crd.longitude, function(data) {
-    $('.js-temp').text(data.currently.apparentTemperature + ' °C');
-    $('.js-windspeed').text(data.currently.windSpeed + ' m/s');
-
-    $('.js-weather-icon').text(weatherIcons[data.currently.icon]);
-  });
-}
-
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-}
-
-navigator.geolocation.getCurrentPosition(success, error, options);
-
-// http://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&sensor=true_or_false
-
-$('.js-custom-address').on('click', 'a', function(event) {
-  event.preventDefault();
-
-  var address = $('input', '.js-custom-address').val();
-
-  $.ajax({
-    url: 'http://maps.googleapis.com/maps/api/geocode/json',
-    data: {
-      address: address,
-      sensor: false
-    },
-    success: function(data) {
-      $('.js-custom-address-result').text(
-        data.results[0].geometry.location.lat +
-        ',' +
-        data.results[0].geometry.location.lng
-      );
-
-      getWeahterData(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng, function(data) {
-        $('.js-custom-address-temp').text(data.currently.apparentTemperature + ' °C');
-
-        $('.js-custom-weather-icon').text(weatherIcons[data.currently.icon]);
-      });
-    }
-  });
-});
-
-var getWeahterData = function(lat, lng, callback) {
-  $.ajax({
-    url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + lat + ',' + lng,
-    data: {
-      units : 'si'
-    },
-    dataType: 'jsonp',
-    success: function(data) {
-      callback(data);
-    }
-  });
-};
-
-$.ajax({
-  url: 'https://maps.googleapis.com/maps/api/geocode/json',
-  data: {
-    address: 'Manaus',
-    sensor: false
-  },
-  success: function(data) {
-    var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
+    var crd = JSON.parse(localStorage.getItem('position'));
 
     $.ajax({
-      url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + lat + ',' + lng,
+      url: 'https://maps.googleapis.com/maps/api/geocode/json',
+      data: {
+        latlng: crd.latitude + ',' + crd.longitude,
+        sensor: true,
+        language: localStorage['language']
+      },
+      success: function(data) {
+        $('.js-current-address').text(data.results[0].formatted_address);
+      }
+    });
+
+    $.ajax({
+      url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + crd.latitude + ',' + crd.longitude,
       data: {
         units : 'si'
       },
       dataType: 'jsonp',
       success: function(data) {
-        $('.js-weather-manaus').text(data.currently.summary + ' (' + data.currently.temperature + '°C)');
+        $('.js-current-weather').text(weatherIcons[data.currently.icon]);
       }
     });
-  }
-});
 
-$.ajax({
-  url: 'https://maps.googleapis.com/maps/api/geocode/json',
-  data: {
-    address: 'Sao Paulo',
-    sensor: false
-  },
-  success: function(data) {
-    var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
+    $('.js-current-position').text(crd.latitude + ', ' + crd.longitude);
+  };
+
+  var error = function(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  };
+
+  navigator.geolocation.getCurrentPosition(getAddress, error, options);
+
+  $(document).on('change', '.js-language', function(e) {
+    localStorage['language'] = $(this).val();
+
+    getAddress();
+  });
+
+  $('.js-language').val(localStorage.getItem('language'));
+
+  $('.js-custom-location').on('click', 'a', function(event) {
+    event.preventDefault();
+
+    var address = $('input', '.js-custom-location').val();
 
     $.ajax({
-      url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + lat + ',' + lng,
+      url: 'http://maps.googleapis.com/maps/api/geocode/json',
       data: {
-        units : 'si'
+        address: address,
+        sensor: false
       },
-      dataType: 'jsonp',
       success: function(data) {
-        $('.js-weather-sao-paulo').text(data.currently.summary + ' (' + data.currently.temperature + '°C)');
+        $('.js-custom-location-result').text(
+          data.results[0].geometry.location.lat +
+          ', ' +
+          data.results[0].geometry.location.lng
+        );
+
+        $('.js-custom-location-name').text(data.results[0].address_components[0].long_name);
       }
-    });
-  }
+  });
+});
 });
