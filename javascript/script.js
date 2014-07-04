@@ -93,7 +93,6 @@ $(document).ready(function() {
           ', ' +
           data.results[0].geometry.location.lng
         );
-         $('.js-current-weather').text(weatherIcons[data.currently.icon]);
 
         $('.js-custom-location-name').text(data.results[0].address_components[0].long_name);
       }
