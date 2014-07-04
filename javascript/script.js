@@ -95,7 +95,17 @@ $(document).ready(function() {
         );
 
         $('.js-custom-location-name').text(data.results[0].address_components[0].long_name);
+
+        $.ajax({
+      url: 'https://api.forecast.io/forecast/a955df0e9afe8c822ebb3adf30265fb6/' + crd.latitude + ',' + crd.longitude,
+      data: {
+        units : 'si'
+      },
+      dataType: 'jsonp',
+      success: function(data) {
         $('.js-current-weather').text(weatherIcons[data.currently.icon]);
+      }
+    });
       }
   });
 });
